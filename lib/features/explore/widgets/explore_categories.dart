@@ -33,38 +33,35 @@ class ExploreCategories extends StatelessWidget {
 
       return Skeletonizer(
         enabled: isLoading,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: SingleChildScrollView(
+        child: SizedBox(
+          height: 36,
+          child: ListView.separated(
             clipBehavior: Clip.none,
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              spacing: 12,
-              children: [
-                for (int i = 0; i < items.length; i++)
-                  if (isLoading)
-                    _CategoryItem(
-                      isActive: false,
-                      category: items[i],
-                      onTap: () {},
-                    )
-                  else
-                    Obx(() {
-                      final isActive =
-                          controller.categories[i] ==
-                          controller.currentCategory.value;
+            itemCount: items.length,
+            separatorBuilder: (_, _) => const SizedBox(width: 12),
+            itemBuilder: (context, i) {
+              if (isLoading) {
+                return _CategoryItem(
+                  isActive: false,
+                  category: items[i],
+                  onTap: () {},
+                );
+              }
 
-                      return _CategoryItem(
-                        isActive: isActive,
-                        category: items[i],
-                        onTap: () => controller.categoryChange(i),
-                      );
-                    }),
-              ],
-            ),
+              return Obx(() {
+                final isActive =
+                    controller.categories[i] ==
+                    controller.currentCategory.value;
+
+                return _CategoryItem(
+                  isActive: isActive,
+                  category: items[i],
+                  onTap: () => controller.categoryChange(i),
+                );
+              });
+            },
           ),
         ),
       );
