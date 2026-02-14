@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lask_news_app/features/explore/controllers/explore_controller.dart';
 import 'package:lask_news_app/features/explore/widgets/explore_appbar.dart';
 import 'package:lask_news_app/features/explore/widgets/explore_articles.dart';
 import 'package:lask_news_app/features/explore/widgets/explore_categories.dart';
@@ -8,6 +10,8 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ExploreController());
+
     return const Scaffold(
       appBar: ExploreAppbar(),
       body: Padding(

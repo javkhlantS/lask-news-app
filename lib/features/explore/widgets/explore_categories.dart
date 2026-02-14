@@ -1,38 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask_news_app/core/models/category.dart';
 import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
 import 'package:lask_news_app/features/explore/controllers/explore_controller.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ExploreCategories extends StatelessWidget {
   const ExploreCategories({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ExploreController());
+    final controller = Get.find<ExploreController>();
 
-    return SingleChildScrollView(
-      clipBehavior: Clip.none,
-      scrollDirection: Axis.horizontal,
-      physics: const BouncingScrollPhysics(),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: 12,
-        children: [
-          for (int i = 0; i < controller.categories.length; i++)
-            Obx(() {
-              final isActive =
-                  controller.categories[i] == controller.currentCategory.value;
+    return Obx(() {
+      final isLoading = controller.isCategoriesLoading.value;
+      final List<Category> items = isLoading
+          ? List.filled(
+              7,
+              Category(
+                createdAt: DateTime.now(),
+                documentId: BoneMock.words(1),
+                id: 1,
+                order: 1,
+                publishedAt: DateTime.now(),
+                slug: BoneMock.subtitle,
+                title: BoneMock.title,
+                updatedAt: DateTime.now(),
+              ),
+            )
+          : controller.categories;
 
-              return _CategoryItem(
-                isActive: isActive,
-                category: controller.categories[i],
-                onTap: () => controller.categoryChange(i),
-              );
-            }),
-        ],
-      ),
-    );
+      return Skeletonizer(
+        enabled: isLoading,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: SingleChildScrollView(
+            clipBehavior: Clip.none,
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              spacing: 12,
+              children: [
+                for (int i = 0; i < items.length; i++)
+                  if (isLoading)
+                    _CategoryItem(
+                      isActive: false,
+                      category: items[i],
+                      onTap: () {},
+                    )
+                  else
+                    Obx(() {
+                      final isActive =
+                          controller.categories[i] ==
+                          controller.currentCategory.value;
+
+                      return _CategoryItem(
+                        isActive: isActive,
+                        category: items[i],
+                        onTap: () => controller.categoryChange(i),
+                      );
+                    }),
+              ],
+            ),
+          ),
+        ),
+      );
+    });
   }
 }
 
@@ -44,7 +80,7 @@ class _CategoryItem extends StatelessWidget {
   });
 
   final bool isActive;
-  final String category;
+  final Category category;
   final VoidCallback onTap;
 
   @override
@@ -76,7 +112,7 @@ class _CategoryItem extends StatelessWidget {
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
           child: Text(
-            category,
+            category.title,
             style: context.appTextStyleExtensions.body2Semibold,
           ),
         ),

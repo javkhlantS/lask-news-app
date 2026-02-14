@@ -14,6 +14,9 @@ dependencies:
   theme_extensions_builder_annotation: ^7.1.0
   get: ^4.7.3
   flutter_native_splash: ^2.4.7
+  flutter_dotenv: ^6.0.0
+  dio: ^5.9.1
+  skeletonizer: ^2.1.3
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +31,7 @@ flutter:
 
   assets:
     - assets/images/
+    - .env
 
 fonts:
   - family: Inter

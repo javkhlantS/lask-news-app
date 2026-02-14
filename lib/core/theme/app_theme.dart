@@ -26,6 +26,9 @@ class AppTheme {
       ),
       scaffoldBackgroundColor: _lightColors.backgroundPrimary,
       appBarTheme: AppBarTheme(backgroundColor: _lightColors.brandBlue10),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: _lightColors.brandBlue,
+      ),
       extensions: [_lightColors, _lightTextStyles, _lightButtonStyles],
     );
   }
@@ -43,6 +46,9 @@ class AppTheme {
       iconButtonTheme: IconButtonThemeData(style: _darkButtonStyles.filledIcon),
       scaffoldBackgroundColor: _darkColors.backgroundPrimary,
       appBarTheme: AppBarTheme(backgroundColor: _darkColors.brandBlue10),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: _darkColors.brandBlue,
+      ),
       extensions: [_darkColors, _darkTextStyles, _darkButtonStyles],
     );
   }
