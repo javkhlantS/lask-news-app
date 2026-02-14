@@ -1,0 +1,523 @@
+name: lask_news_app
+description: "A new Flutter project."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.8
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  theme_extensions_builder_annotation: ^7.1.0
+  get: ^4.7.3
+  flutter_native_splash: ^2.4.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  build_runner: ^2.11.1
+  theme_extensions_builder: ^7.2.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+fonts:
+  - family: Inter
+    fonts:
+      - asset: assets/fonts/Inter_18pt-Thin.ttf
+        weight: 100
+      - asset: assets/fonts/Inter_18pt-ThinItalic.ttf
+        weight: 100
+        style: italic
+      - asset: assets/fonts/Inter_18pt-ExtraLight.ttf
+        weight: 200
+      - asset: assets/fonts/Inter_18pt-ExtraLightItalic.ttf
+        weight: 200
+        style: italic
+      - asset: assets/fonts/Inter_18pt-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Inter_18pt-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Inter_18pt-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Inter_18pt-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Inter_18pt-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Inter_18pt-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Inter_18pt-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Inter_18pt-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Inter_18pt-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Inter_18pt-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Inter_18pt-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Inter_18pt-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Inter_18pt-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Inter_18pt-BlackItalic.ttf
+        weight: 900
+        style: italic
+      - asset: assets/fonts/Inter_24pt-Thin.ttf
+        weight: 100
+      - asset: assets/fonts/Inter_24pt-ThinItalic.ttf
+        weight: 100
+        style: italic
+      - asset: assets/fonts/Inter_24pt-ExtraLight.ttf
+        weight: 200
+      - asset: assets/fonts/Inter_24pt-ExtraLightItalic.ttf
+        weight: 200
+        style: italic
+      - asset: assets/fonts/Inter_24pt-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Inter_24pt-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Inter_24pt-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Inter_24pt-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Inter_24pt-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Inter_24pt-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Inter_24pt-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Inter_24pt-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Inter_24pt-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Inter_24pt-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Inter_24pt-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Inter_24pt-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Inter_24pt-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Inter_24pt-BlackItalic.ttf
+        weight: 900
+        style: italic
+      - asset: assets/fonts/Inter_28pt-Thin.ttf
+        weight: 100
+      - asset: assets/fonts/Inter_28pt-ThinItalic.ttf
+        weight: 100
+        style: italic
+      - asset: assets/fonts/Inter_28pt-ExtraLight.ttf
+        weight: 200
+      - asset: assets/fonts/Inter_28pt-ExtraLightItalic.ttf
+        weight: 200
+        style: italic
+      - asset: assets/fonts/Inter_28pt-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Inter_28pt-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Inter_28pt-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Inter_28pt-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Inter_28pt-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Inter_28pt-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Inter_28pt-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Inter_28pt-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Inter_28pt-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Inter_28pt-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Inter_28pt-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Inter_28pt-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Inter_28pt-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Inter_28pt-BlackItalic.ttf
+        weight: 900
+        style: italic
+  - family: Merriweather
+    fonts:
+      - asset: assets/fonts/Merriweather_24pt-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Merriweather_24pt-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Merriweather_24pt-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Merriweather_24pt-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Merriweather_24pt-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Merriweather_24pt-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Merriweather_24pt-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Merriweather_24pt-BlackItalic.ttf
+        weight: 900
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Merriweather_36pt-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Merriweather_36pt-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Merriweather_36pt-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Merriweather_36pt-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Merriweather_36pt-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Merriweather_36pt-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Merriweather_36pt-BlackItalic.ttf
+        weight: 900
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Merriweather_48pt-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Merriweather_48pt-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Merriweather_48pt-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Merriweather_48pt-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Merriweather_48pt-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Merriweather_48pt-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Merriweather_48pt-BlackItalic.ttf
+        weight: 900
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Merriweather_96pt-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Merriweather_96pt-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Merriweather_96pt-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Merriweather_96pt-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Merriweather_96pt-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Merriweather_96pt-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Merriweather_96pt-BlackItalic.ttf
+        weight: 900
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Merriweather_120pt-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Merriweather_120pt-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Merriweather_120pt-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Merriweather_120pt-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Merriweather_120pt-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Merriweather_120pt-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Merriweather_120pt-BlackItalic.ttf
+        weight: 900
+        style: italic
+  - family: MerriweatherSemiCondensed
+    fonts:
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Merriweather_24pt_SemiCondensed-BlackItalic.ttf
+        weight: 900
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Merriweather_36pt_SemiCondensed-BlackItalic.ttf
+        weight: 900
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Merriweather_48pt_SemiCondensed-BlackItalic.ttf
+        weight: 900
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Merriweather_96pt_SemiCondensed-BlackItalic.ttf
+        weight: 900
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-Light.ttf
+        weight: 300
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-LightItalic.ttf
+        weight: 300
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-Italic.ttf
+        weight: 400
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-MediumItalic.ttf
+        weight: 500
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-SemiBoldItalic.ttf
+        weight: 600
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-BoldItalic.ttf
+        weight: 700
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-ExtraBoldItalic.ttf
+        weight: 800
+        style: italic
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-Black.ttf
+        weight: 900
+      - asset: assets/fonts/Merriweather_120pt_SemiCondensed-BlackItalic.ttf
+        weight: 900
+        style: italic

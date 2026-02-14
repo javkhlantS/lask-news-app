@@ -1,0 +1,13 @@
+flutter_native_splash:
+  color: "#E9EEFA"
+  color_dark: "#1A1A1A"
+  image: "assets/images/logo-secondary.png"
+  fullscreen: true
+
+  android_12:
+    color: "#E9EEFA"
+    color_dark: "#1A1A1A"
+    image: "assets/images/logo-secondary.png"
+    fullscreen: true
+
+  web: false
