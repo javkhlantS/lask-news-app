@@ -10,27 +10,30 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController());
+    final controller = Get.put(HomeController());
 
     return Scaffold(
       appBar: const HomeAppbar(),
-      body: ListView(
-        padding: EdgeInsets.only(
-          top: 24,
-          left: 24,
-          right: 24,
-          bottom: MediaQuery.of(context).padding.bottom + 24,
+      body: RefreshIndicator(
+        onRefresh: controller.fetchHome,
+        child: ListView(
+          padding: EdgeInsets.only(
+            top: 24,
+            left: 24,
+            right: 24,
+            bottom: MediaQuery.of(context).padding.bottom + 24,
+          ),
+          physics: const BouncingScrollPhysics(),
+          children: const [
+            HomeFeaturedArticles(),
+            SizedBox(height: 16),
+            HomeArticlesByCategory(),
+            SizedBox(height: 16),
+            HomeArticlesByCategory(),
+            SizedBox(height: 16),
+            HomeArticlesByCategory(),
+          ],
         ),
-        physics: const BouncingScrollPhysics(),
-        children: const [
-          HomeFeaturedArticles(),
-          SizedBox(height: 16),
-          HomeArticlesByCategory(),
-          SizedBox(height: 16),
-          HomeArticlesByCategory(),
-          SizedBox(height: 16),
-          HomeArticlesByCategory(),
-        ],
       ),
     );
   }
