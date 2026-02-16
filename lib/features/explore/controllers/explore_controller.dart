@@ -43,10 +43,12 @@ class ExploreController extends GetxController {
     final newCategory = categories[index];
     if (newCategory == currentCategory.value) {
       currentCategory.value = null;
+      fetchArticles();
       return;
     }
 
     currentCategory.value = newCategory;
+    fetchArticles();
   }
 
   Future<void> fetchArticles() async {
@@ -62,6 +64,13 @@ class ExploreController extends GetxController {
               "fields": ["id", "url"],
             },
           },
+          "filters": currentCategory.value != null
+              ? {
+                  "categories": {
+                    "slug": {"\$eq": currentCategory.value!.slug},
+                  },
+                }
+              : null,
         },
       );
       log('Articles count: ${articles.length}');
