@@ -42,6 +42,7 @@ class ExploreArticleCard extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               ArticleMetadata(
+                author: article.author,
                 publishedAt: article.publishedAt,
               ),
             ],

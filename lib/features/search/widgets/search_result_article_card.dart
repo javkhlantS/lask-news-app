@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask_news_app/core/models/author.dart';
+import 'package:lask_news_app/core/models/picture.dart';
 import 'package:lask_news_app/core/routing/constants/app_route_names.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
 import 'package:lask_news_app/features/articles/widgets/article_metadata.dart';
@@ -30,7 +32,18 @@ class SearchResultArticleCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 4),
-              const ArticleMetadata(),
+              ArticleMetadata(
+                author: Author(
+                  id: 1,
+                  documentId: "123",
+                  avatar: const Picture(id: 1, documentId: "asd", url: ""),
+                  createdAt: DateTime.now(),
+                  firstName: "asd ",
+                  lastName: "asd",
+                  publishedAt: DateTime.now(),
+                  updatedAt: DateTime.now(),
+                ),
+              ),
             ],
           ),
         ),

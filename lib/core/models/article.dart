@@ -1,3 +1,4 @@
+import 'package:lask_news_app/core/models/author.dart';
 import 'package:lask_news_app/core/models/category.dart';
 import 'package:lask_news_app/core/models/picture.dart';
 
@@ -11,6 +12,7 @@ class Article {
   final DateTime? publishedAt;
   final Picture picture;
   final List<Category>? categories;
+  final Author author;
 
   const Article({
     required this.id,
@@ -22,6 +24,7 @@ class Article {
     this.publishedAt,
     required this.picture,
     this.categories,
+    required this.author,
   });
 
   factory Article.fromJson(Map<String, dynamic> json) {
@@ -43,6 +46,7 @@ class Article {
       categories: (json['categories'] as List<dynamic>?)
           ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
           .toList(),
+      author: Author.fromJson(json['author'] as Map<String, dynamic>),
     );
   }
 
@@ -57,6 +61,7 @@ class Article {
       'publishedAt': publishedAt?.toIso8601String(),
       'picture': picture.toJson(),
       'categories': categories?.map((e) => e.toJson()).toList(),
+      'author': author.toJson(),
     };
   }
 }

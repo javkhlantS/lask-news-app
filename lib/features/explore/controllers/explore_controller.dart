@@ -63,6 +63,9 @@ class ExploreController extends GetxController {
             "picture": {
               "fields": ["id", "url"],
             },
+            "author": {
+              "populate": ["avatar"],
+            },
           },
           "filters": currentCategory.value != null
               ? {

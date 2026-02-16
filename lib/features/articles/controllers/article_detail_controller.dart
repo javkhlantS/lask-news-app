@@ -22,8 +22,6 @@ class ArticleDetailController extends GetxController {
   Future<void> fetchArticle() async {
     isLoading.value = true;
 
-    await Future.delayed(const Duration(seconds: 10));
-
     try {
       article.value = await _articleRepository.getArticle(
         documentId: documentId,
@@ -32,6 +30,9 @@ class ArticleDetailController extends GetxController {
           "populate": {
             "picture": {
               "fields": ["id", "url"],
+            },
+            "author": {
+              "populate": ["avatar"],
             },
           },
         },

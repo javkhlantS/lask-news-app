@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:get/get.dart';
 import 'package:lask_news_app/core/models/article.dart';
+import 'package:lask_news_app/core/models/author.dart';
 import 'package:lask_news_app/core/models/picture.dart';
 import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
@@ -42,6 +43,20 @@ class ArticleDetailContent extends StatelessWidget {
                     documentId: BoneMock.words(1),
                     url: "",
                   ),
+                  author: Author(
+                    id: 1,
+                    documentId: BoneMock.subtitle,
+                    avatar: Picture(
+                      id: 1,
+                      documentId: BoneMock.subtitle,
+                      url: "",
+                    ),
+                    createdAt: DateTime.now(),
+                    firstName: BoneMock.name,
+                    lastName: BoneMock.name,
+                    publishedAt: DateTime.now(),
+                    updatedAt: DateTime.now(),
+                  ),
                 )
               : controller.article.value!;
 
@@ -62,6 +77,7 @@ class ArticleDetailContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 ArticleMetadata(
+                  author: article.author,
                   publishedAt: article.publishedAt,
                 ),
                 const SizedBox(height: 24),
