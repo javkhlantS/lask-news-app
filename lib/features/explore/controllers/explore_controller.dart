@@ -51,8 +51,8 @@ class ExploreController extends GetxController {
     fetchArticles();
   }
 
-  Future<void> fetchArticles() async {
-    isArticlesLoading.value = true;
+  Future<void> fetchArticles({bool showLoading = true}) async {
+    if (showLoading) isArticlesLoading.value = true;
 
     try {
       articles.value = await _articleRepository.getArticles(
@@ -77,7 +77,14 @@ class ExploreController extends GetxController {
     } catch (e) {
       log('Failed to fetch articles: $e');
     } finally {
-      isArticlesLoading.value = false;
+      if (showLoading) isArticlesLoading.value = false;
     }
+  }
+
+  Future<void> refreshData() async {
+    await Future.wait([
+      fetchCategories(),
+      fetchArticles(showLoading: false),
+    ]);
   }
 }

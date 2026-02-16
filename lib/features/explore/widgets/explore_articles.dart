@@ -36,36 +36,46 @@ class ExploreArticles extends StatelessWidget {
           : controller.articles;
 
       if (!isLoading && articles.isEmpty) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).padding.bottom,
-          ),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.article_outlined,
-                  size: 64,
-                  color: context.appColorsExtensions.textSecondary,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'No articles found',
-                  style: context.appTextStyleExtensions.body1Semibold.copyWith(
-                    color: context.appColorsExtensions.textSecondary,
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(
+                parent: BouncingScrollPhysics(),
+              ),
+              child: SizedBox(
+                height: constraints.maxHeight,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.article_outlined,
+                        size: 64,
+                        color: context.appColorsExtensions.textSecondary,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'No articles found',
+                        style: context.appTextStyleExtensions.body1Semibold
+                            .copyWith(
+                              color: context.appColorsExtensions.textSecondary,
+                            ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       }
 
       return Skeletonizer(
         enabled: isLoading,
         child: ListView.separated(
-          physics: const BouncingScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: BouncingScrollPhysics(),
+          ),
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).padding.bottom + 16,
           ),

@@ -10,22 +10,25 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ExploreController());
+    final controller = Get.put(ExploreController());
 
-    return const Scaffold(
-      appBar: ExploreAppbar(),
-      body: Padding(
-        padding: EdgeInsets.only(
-          left: 24,
-          right: 24,
-          top: 16,
-        ),
-        child: Column(
-          children: [
-            ExploreCategories(),
-            SizedBox(height: 24),
-            Expanded(child: ExploreArticles()),
-          ],
+    return Scaffold(
+      appBar: const ExploreAppbar(),
+      body: RefreshIndicator(
+        onRefresh: controller.refreshData,
+        child: const Padding(
+          padding: EdgeInsets.only(
+            left: 24,
+            right: 24,
+            top: 16,
+          ),
+          child: Column(
+            children: [
+              ExploreCategories(),
+              SizedBox(height: 24),
+              Expanded(child: ExploreArticles()),
+            ],
+          ),
         ),
       ),
     );
