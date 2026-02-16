@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask_news_app/core/models/article.dart';
 import 'package:lask_news_app/core/models/picture.dart';
+import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
+import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
 import 'package:lask_news_app/features/explore/controllers/explore_controller.dart';
 import 'package:lask_news_app/features/explore/widgets/explore_article_card.dart';
 import 'package:lask_news_app/features/explore/widgets/explore_featured_article_card.dart';
@@ -32,6 +34,33 @@ class ExploreArticles extends StatelessWidget {
               ),
             )
           : controller.articles;
+
+      if (!isLoading && articles.isEmpty) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).padding.bottom,
+          ),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.article_outlined,
+                  size: 64,
+                  color: context.appColorsExtensions.textSecondary,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'No articles found',
+                  style: context.appTextStyleExtensions.body1Semibold.copyWith(
+                    color: context.appColorsExtensions.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
 
       return Skeletonizer(
         enabled: isLoading,
