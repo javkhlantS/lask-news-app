@@ -34,7 +34,7 @@ class HomeArticlesByCategory extends StatelessWidget {
               5,
               (index) => Padding(
                 padding: EdgeInsets.only(right: index < 4 ? 24 : 0),
-                child: const HomeArticleCard(),
+                // child: const HomeArticleCard(),
               ),
             ),
           ),

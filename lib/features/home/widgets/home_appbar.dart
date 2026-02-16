@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
 
@@ -30,7 +31,10 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ),
             ),
-            Text("Sun 9 April, 2023", style: context.appTextStyleExtensions.h5),
+            Text(
+              DateFormat('EEE d MMM, y').format(DateTime.now()),
+              style: context.appTextStyleExtensions.h5,
+            ),
           ],
         ),
       ),

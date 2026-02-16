@@ -10,11 +10,11 @@ class ArticleMetadata extends StatelessWidget {
   const ArticleMetadata({
     super.key,
     this.publishedAt,
-    required this.author,
+    this.author,
   });
 
   final DateTime? publishedAt;
-  final Author author;
+  final Author? author;
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +32,14 @@ class ArticleMetadata extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             child: Image.network(
-              PictureUtils.getFullUrl(url: author.avatar.url),
+              PictureUtils.getFullUrl(url: author?.avatar.url ?? ''),
               fit: BoxFit.cover,
             ),
           ),
         ),
         const SizedBox(width: 8),
         Text(
-          "${author.firstName} ${author.lastName}${publishedAt != null ? ' · ${DateFormat.yMMMd().format(publishedAt!)}' : ''}",
+          "${author?.firstName} ${author?.lastName}${publishedAt != null ? ' · ${DateFormat.yMMMd().format(publishedAt!)}' : ''}",
           style: context.appTextStyleExtensions.footnote.copyWith(
             color: context.appColorsExtensions.textSecondary,
           ),

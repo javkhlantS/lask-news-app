@@ -19,7 +19,7 @@ class BottomNavController extends GetxController {
     {"label": "Profile", "icon": Icons.person_outline},
   ];
 
-  final currentIndex = 1.obs;
+  final currentIndex = 0.obs;
 
   void changePage(int index) {
     if (currentIndex.value == index) return;

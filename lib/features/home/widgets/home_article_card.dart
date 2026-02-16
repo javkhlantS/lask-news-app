@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask_news_app/core/models/article.dart';
 import 'package:lask_news_app/core/routing/constants/app_route_names.dart';
 import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
+import 'package:lask_news_app/core/utils/picture_utils.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class HomeArticleCard extends StatelessWidget {
-  const HomeArticleCard({super.key});
+  const HomeArticleCard({
+    super.key,
+    required this.article,
+  });
+
+  final Article article;
 
   void navigateToArticle() {
-    Get.toNamed(AppRouteNames.articleDetail);
+    Get.toNamed(
+      AppRouteNames.articleDetail,
+      arguments: {
+        "documentId": article.documentId,
+      },
+    );
   }
 
   @override
@@ -25,9 +38,14 @@ class HomeArticleCard extends StatelessWidget {
             child: SizedBox(
               width: width,
               height: width,
-              child: Image.network(
-                "https://images.pexels.com/photos/18887675/pexels-photo-18887675.jpeg",
-                fit: BoxFit.cover,
+              child: Skeleton.replace(
+                replacement: const Bone(),
+                width: double.infinity,
+                height: double.infinity,
+                child: Image.network(
+                  PictureUtils.getFullUrl(url: article.picture.url),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -42,7 +60,7 @@ class HomeArticleCard extends StatelessWidget {
                 GestureDetector(
                   onTap: navigateToArticle,
                   child: Text(
-                    "Experience the Serenity of Japan's Traditional Countryside",
+                    article.title,
                     style: context.appTextStyleExtensions.h4,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -50,7 +68,9 @@ class HomeArticleCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "Technology",
+                  (article.categories ?? [])
+                      .map((category) => category.title)
+                      .join(", "),
                   style: context.appTextStyleExtensions.body2.copyWith(
                     color: context.appColorsExtensions.textSecondary,
                   ),
