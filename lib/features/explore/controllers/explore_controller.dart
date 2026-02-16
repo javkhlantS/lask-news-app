@@ -1,25 +1,30 @@
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:lask_news_app/core/models/article.dart';
 import 'package:lask_news_app/core/models/category.dart';
+import 'package:lask_news_app/core/repositories/article_repository.dart';
 import 'package:lask_news_app/core/repositories/category_repository.dart';
 
 class ExploreController extends GetxController {
   final _categoryRepository = CategoryRepository();
+  final _articleRepository = ArticleRepository();
 
   final categories = <Category>[].obs;
   final currentCategory = Rxn<Category>();
   final isCategoriesLoading = true.obs;
 
+  final articles = <Article>[].obs;
+  final isArticlesLoading = true.obs;
+
   @override
   void onInit() {
     super.onInit();
-    fetchCategories();
+    Future.wait([fetchCategories(), fetchArticles()]);
   }
 
   Future<void> fetchCategories() async {
     isCategoriesLoading.value = true;
-    await Future.delayed(const Duration(seconds: 10));
 
     try {
       categories.value = await _categoryRepository.getCategories(sort: 'order');
@@ -42,5 +47,28 @@ class ExploreController extends GetxController {
     }
 
     currentCategory.value = newCategory;
+  }
+
+  Future<void> fetchArticles() async {
+    isArticlesLoading.value = true;
+
+    try {
+      articles.value = await _articleRepository.getArticles(
+        query: {
+          "sort": "publishedAt",
+          "fields": ["id", "title", "publishedAt"],
+          "populate": {
+            "picture": {
+              "fields": ["id", "url"],
+            },
+          },
+        },
+      );
+      log('Articles count: ${articles.length}');
+    } catch (e) {
+      log('Failed to fetch articles: $e');
+    } finally {
+      isArticlesLoading.value = false;
+    }
   }
 }
