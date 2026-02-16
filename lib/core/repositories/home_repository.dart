@@ -13,6 +13,13 @@ class HomeRepository {
           "featured_articles": {
             "populate": ["picture", "categories"],
           },
+          "featured_categories": {
+            "populate": {
+              "articles": {
+                "populate": ["picture"],
+              },
+            },
+          },
         },
       },
     );
