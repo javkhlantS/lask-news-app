@@ -51,6 +51,13 @@ class ExploreController extends GetxController {
     fetchArticles();
   }
 
+  void selectCategoryBySlug(String slug) {
+    final match = categories.firstWhereOrNull((c) => c.slug == slug);
+    if (match == null || match == currentCategory.value) return;
+    currentCategory.value = match;
+    fetchArticles();
+  }
+
   Future<void> fetchArticles({bool showLoading = true}) async {
     if (showLoading) isArticlesLoading.value = true;
 
