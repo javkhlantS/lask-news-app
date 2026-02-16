@@ -22,10 +22,13 @@ class ArticleDetailController extends GetxController {
   Future<void> fetchArticle() async {
     isLoading.value = true;
 
+    await Future.delayed(const Duration(seconds: 10));
+
     try {
       article.value = await _articleRepository.getArticle(
         documentId: documentId,
         query: {
+          "fields": ["id", "title", "content", "publishedAt"],
           "populate": {
             "picture": {
               "fields": ["id", "url"],

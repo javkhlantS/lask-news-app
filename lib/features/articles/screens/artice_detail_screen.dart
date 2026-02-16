@@ -18,7 +18,12 @@ class ArticeDetailScreen extends StatelessWidget {
       child: Scaffold(
         extendBody: true,
         bottomNavigationBar: ArticleDetailBottomNav(),
-        body: Stack(children: [ArticleDetailImage(), ArticleDetailContent()]),
+        body: Stack(
+          children: [
+            ArticleDetailImage(),
+            ArticleDetailContent(),
+          ],
+        ),
       ),
     );
   }
