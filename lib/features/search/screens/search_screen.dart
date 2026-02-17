@@ -24,7 +24,12 @@ class SearchScreen extends StatelessWidget {
               Expanded(
                 child: TextField(
                   onSubmitted: (value) => {
-                    Get.offAndToNamed(AppRouteNames.searchResult),
+                    Get.offAndToNamed(
+                      AppRouteNames.searchResult,
+                      arguments: {
+                        "search": controller.textController.text,
+                      },
+                    ),
                   },
                   controller: controller.textController,
                   autofocus: true,

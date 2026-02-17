@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lask_news_app/core/models/author.dart';
+import 'package:lask_news_app/core/models/article.dart';
 import 'package:lask_news_app/core/routing/constants/app_route_names.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
+import 'package:lask_news_app/core/utils/picture_utils.dart';
 import 'package:lask_news_app/features/articles/widgets/article_metadata.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class SearchResultArticleCard extends StatelessWidget {
-  const SearchResultArticleCard({super.key});
+  final Article article;
+
+  const SearchResultArticleCard({
+    super.key,
+    required this.article,
+  });
 
   void navigateToArticle() {
-    Get.toNamed(AppRouteNames.articleDetail);
+    Get.toNamed(
+      AppRouteNames.articleDetail,
+      arguments: {
+        "documentId": article.documentId,
+      },
+    );
   }
 
   @override
@@ -24,7 +36,7 @@ class SearchResultArticleCard extends StatelessWidget {
               GestureDetector(
                 onTap: navigateToArticle,
                 child: Text(
-                  "Experience the Serenity of Japan's Traditional Countryside",
+                  article.title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: context.appTextStyleExtensions.h5,
@@ -32,15 +44,8 @@ class SearchResultArticleCard extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               ArticleMetadata(
-                author: Author(
-                  id: 1,
-                  documentId: "123",
-                  createdAt: DateTime.now(),
-                  firstName: "asd ",
-                  lastName: "asd",
-                  publishedAt: DateTime.now(),
-                  updatedAt: DateTime.now(),
-                ),
+                author: article.author,
+                publishedAt: article.publishedAt,
               ),
             ],
           ),
@@ -53,9 +58,14 @@ class SearchResultArticleCard extends StatelessWidget {
             height: 80,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-            child: Image.network(
-              "https://images.pexels.com/photos/18887675/pexels-photo-18887675.jpeg",
-              fit: BoxFit.cover,
+            child: Skeleton.replace(
+              replacement: const Bone(),
+              width: double.infinity,
+              height: double.infinity,
+              child: Image.network(
+                PictureUtils.getFullUrl(url: article.picture.url),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

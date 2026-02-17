@@ -37,10 +37,21 @@ class ArticleMetadata extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
-        Text(
-          "${author?.firstName} ${author?.lastName}${publishedAt != null ? ' · ${DateFormat.yMMMd().format(publishedAt!)}' : ''}",
-          style: context.appTextStyleExtensions.footnote.copyWith(
-            color: context.appColorsExtensions.textSecondary,
+        Flexible(
+          child: Text.rich(
+            TextSpan(
+              style: context.appTextStyleExtensions.footnote.copyWith(
+                color: context.appColorsExtensions.textSecondary,
+              ),
+              children: [
+                TextSpan(text: "${author?.firstName} ${author?.lastName}"),
+                if (publishedAt != null)
+                  TextSpan(
+                    text:
+                        " ·\u00A0${DateFormat.yMMMd().format(publishedAt!).replaceAll(' ', '\u00A0')}",
+                  ),
+              ],
+            ),
           ),
         ),
       ],
