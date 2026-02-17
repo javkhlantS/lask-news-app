@@ -31,8 +31,15 @@ class ArticleDetailController extends GetxController {
             "picture": {
               "fields": ["id", "url"],
             },
-            "author": {
-              "populate": ["avatar"],
+            "createdBy": {
+              "fields": [
+                "id",
+                "firstname",
+                "lastname",
+                "createdAt",
+                "publishedAt",
+                "updatedAt",
+              ],
             },
           },
         },

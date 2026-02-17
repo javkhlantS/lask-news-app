@@ -36,11 +36,6 @@ class HomeFeaturedArticles extends StatelessWidget {
                   author: Author(
                     id: 1,
                     documentId: BoneMock.subtitle,
-                    avatar: Picture(
-                      id: 1,
-                      documentId: BoneMock.subtitle,
-                      url: "",
-                    ),
                     createdAt: DateTime.now(),
                     firstName: BoneMock.name,
                     lastName: BoneMock.name,

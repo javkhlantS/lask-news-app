@@ -19,8 +19,6 @@ class HomeController extends GetxController {
   Future<void> fetchHome() async {
     isLoading.value = true;
 
-    await Future.delayed(const Duration(seconds: 3));
-
     try {
       homeData.value = await _homeRepository.getHome();
     } catch (e) {

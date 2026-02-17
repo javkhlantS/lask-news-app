@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:lask_news_app/core/models/author.dart';
 import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
-import 'package:lask_news_app/core/utils/picture_utils.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ArticleMetadata extends StatelessWidget {
@@ -31,8 +30,8 @@ class ArticleMetadata extends StatelessWidget {
             replacement: const Bone(),
             width: double.infinity,
             height: double.infinity,
-            child: Image.network(
-              PictureUtils.getFullUrl(url: author?.avatar.url ?? ''),
+            child: Image.asset(
+              "assets/images/avatar-placeholder.jpg",
               fit: BoxFit.cover,
             ),
           ),

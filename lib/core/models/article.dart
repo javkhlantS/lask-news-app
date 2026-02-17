@@ -46,8 +46,8 @@ class Article {
       categories: (json['categories'] as List<dynamic>?)
           ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
           .toList(),
-      author: json['author'] != null
-          ? Author.fromJson(json['author'] as Map<String, dynamic>)
+      author: json['createdBy'] != null
+          ? Author.fromJson(json['createdBy'] as Map<String, dynamic>)
           : null,
     );
   }
@@ -63,7 +63,7 @@ class Article {
       'publishedAt': publishedAt?.toIso8601String(),
       'picture': picture.toJson(),
       'categories': categories?.map((e) => e.toJson()).toList(),
-      'author': author?.toJson(),
+      'createdBy': author?.toJson(),
     };
   }
 }
