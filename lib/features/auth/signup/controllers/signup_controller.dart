@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignupController extends GetxController {
+  final formKey = GlobalKey<FormState>();
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final obscurePassword = true.obs;
   final obscureConfirmPassword = true.obs;
+  final isSubmitting = false.obs;
 
   void togglePasswordVisibility() {
     obscurePassword.value = !obscurePassword.value;
@@ -17,7 +19,9 @@ class SignupController extends GetxController {
     obscureConfirmPassword.value = !obscureConfirmPassword.value;
   }
 
-  void onSignUp() {}
+  void onSignUp() {
+    if (formKey.currentState!.validate()) {}
+  }
 
   void onGoogleSignUp() {}
 

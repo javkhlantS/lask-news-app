@@ -11,27 +11,41 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SignupController());
+    final controller = Get.put(SignupController());
 
-    return const Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(height: 48),
-              SignupHeader(),
-              SizedBox(height: 40),
-              SignupForm(),
-              SizedBox(height: 24),
-              SignupSocialButtons(),
-              SizedBox(height: 32),
-              SignupFooter(),
-              SizedBox(height: 24),
-            ],
+    return Scaffold(
+      body: Stack(
+        children: [
+          const SafeArea(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  SizedBox(height: 48),
+                  SignupHeader(),
+                  SizedBox(height: 40),
+                  SignupForm(),
+                  SizedBox(height: 24),
+                  SignupSocialButtons(),
+                  SizedBox(height: 32),
+                  SignupFooter(),
+                  SizedBox(height: 24),
+                ],
+              ),
+            ),
           ),
-        ),
+          Obx(
+            () => controller.isSubmitting.value
+                ? const ColoredBox(
+                    color: Colors.black45,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ),
+        ],
       ),
     );
   }

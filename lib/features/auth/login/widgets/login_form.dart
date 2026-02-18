@@ -22,60 +22,38 @@ class LoginForm extends GetView<LoginController> {
       borderRadius: BorderRadius.circular(12),
       borderSide: BorderSide(color: colors.brandBlue, width: 1.5),
     );
+    const errorBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(12)),
+      borderSide: BorderSide(color: Colors.red, width: 1.5),
+    );
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text('Email', style: textStyles.body2Semibold),
-        const SizedBox(height: 8),
-        TextField(
-          controller: controller.emailController,
-          keyboardType: TextInputType.emailAddress,
-          style: textStyles.body2,
-          decoration: InputDecoration(
-            hintText: 'Enter your email',
-            hintStyle: textStyles.body2.copyWith(color: colors.grey4),
-            prefixIcon: Icon(
-              Icons.email_outlined,
-              color: colors.grey5,
-              size: 20,
-            ),
-            filled: true,
-            fillColor: colors.backgroundSecondary,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 14,
-            ),
-            border: inputBorder,
-            enabledBorder: inputBorder,
-            focusedBorder: focusedInputBorder,
-          ),
-        ),
-        const SizedBox(height: 20),
-        Text('Password', style: textStyles.body2Semibold),
-        const SizedBox(height: 8),
-        Obx(
-          () => TextField(
-            controller: controller.passwordController,
-            obscureText: controller.obscurePassword.value,
+    return Form(
+      key: controller.formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text('Email', style: textStyles.body2Semibold),
+          const SizedBox(height: 8),
+          TextFormField(
+            controller: controller.emailController,
+            keyboardType: TextInputType.emailAddress,
             style: textStyles.body2,
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return 'Email is required';
+              }
+              if (!GetUtils.isEmail(value.trim())) {
+                return 'Enter a valid email address';
+              }
+              return null;
+            },
             decoration: InputDecoration(
-              hintText: 'Enter your password',
+              hintText: 'Enter your email',
               hintStyle: textStyles.body2.copyWith(color: colors.grey4),
               prefixIcon: Icon(
-                Icons.lock_outline,
+                Icons.email_outlined,
                 color: colors.grey5,
                 size: 20,
-              ),
-              suffixIcon: GestureDetector(
-                onTap: controller.togglePasswordVisibility,
-                child: Icon(
-                  controller.obscurePassword.value
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                  color: colors.grey5,
-                  size: 20,
-                ),
               ),
               filled: true,
               fillColor: colors.backgroundSecondary,
@@ -86,28 +64,79 @@ class LoginForm extends GetView<LoginController> {
               border: inputBorder,
               enabledBorder: inputBorder,
               focusedBorder: focusedInputBorder,
+              errorBorder: errorBorder,
+              focusedErrorBorder: errorBorder,
             ),
           ),
-        ),
-        const SizedBox(height: 12),
-        Align(
-          alignment: Alignment.centerRight,
-          child: TextButton(
-            onPressed: controller.onForgotPassword,
-            style: buttonStyles.ghostSmall,
-            child: Text(
-              'Forgot Password?',
-              style: textStyles.footnote.copyWith(color: colors.brandBlue),
+          const SizedBox(height: 20),
+          Text('Password', style: textStyles.body2Semibold),
+          const SizedBox(height: 8),
+          Obx(
+            () => TextFormField(
+              controller: controller.passwordController,
+              obscureText: controller.obscurePassword.value,
+              style: textStyles.body2,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Password is required';
+                }
+                if (value.length < 6) {
+                  return 'Password must be at least 6 characters';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                hintText: 'Enter your password',
+                hintStyle: textStyles.body2.copyWith(color: colors.grey4),
+                prefixIcon: Icon(
+                  Icons.lock_outline,
+                  color: colors.grey5,
+                  size: 20,
+                ),
+                suffixIcon: GestureDetector(
+                  onTap: controller.togglePasswordVisibility,
+                  child: Icon(
+                    controller.obscurePassword.value
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                    color: colors.grey5,
+                    size: 20,
+                  ),
+                ),
+                filled: true,
+                fillColor: colors.backgroundSecondary,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
+                border: inputBorder,
+                enabledBorder: inputBorder,
+                focusedBorder: focusedInputBorder,
+                errorBorder: errorBorder,
+                focusedErrorBorder: errorBorder,
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: 24),
-        ElevatedButton(
-          onPressed: controller.onSignIn,
-          style: buttonStyles.filledLarge,
-          child: const Text('Sign In'),
-        ),
-      ],
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: controller.onForgotPassword,
+              style: buttonStyles.ghostSmall,
+              child: Text(
+                'Forgot Password?',
+                style: textStyles.footnote.copyWith(color: colors.brandBlue),
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+          ElevatedButton(
+            onPressed: controller.onSignIn,
+            style: buttonStyles.filledLarge,
+            child: const Text('Sign In'),
+          ),
+        ],
+      ),
     );
   }
 }
