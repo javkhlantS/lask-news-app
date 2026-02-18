@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask_news_app/core/routing/constants/app_route_names.dart';
 
 class LoginController extends GetxController {
   final emailController = TextEditingController();
@@ -18,7 +19,9 @@ class LoginController extends GetxController {
 
   void onAppleSignIn() {}
 
-  void onSignUp() {}
+  void onSignUp() {
+    Get.toNamed(AppRouteNames.signUp);
+  }
 
   @override
   void onClose() {

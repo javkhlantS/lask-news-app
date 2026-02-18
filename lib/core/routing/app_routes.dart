@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:lask_news_app/core/routing/constants/app_route_names.dart';
 import 'package:lask_news_app/core/screens/bottom_nav_screen.dart';
 import 'package:lask_news_app/features/articles/screens/artice_detail_screen.dart';
+import 'package:lask_news_app/features/auth/signup/screens/signup_screen.dart';
 import 'package:lask_news_app/features/search/screens/search_result_screen.dart';
 import 'package:lask_news_app/features/search/screens/search_screen.dart';
 import 'package:lask_news_app/features/welcome/screens/welcome_screen.dart';
@@ -18,6 +19,10 @@ abstract class AppRoutes {
     GetPage(
       name: AppRouteNames.searchResult,
       page: () => const SearchResultScreen(),
+    ),
+    GetPage(
+      name: AppRouteNames.signUp,
+      page: () => const SignupScreen(),
     ),
   ];
 }
