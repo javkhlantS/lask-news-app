@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:lask_news_app/core/controllers/auth_controller.dart';
 import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
 
@@ -20,17 +22,21 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            RichText(
-              text: TextSpan(
-                style: context.appTextStyleExtensions.body2.copyWith(
-                  color: context.appColorsExtensions.textSecondary,
+            Obx(() {
+              final currentUser =
+                  Get.find<AuthController>().currentUser.value;
+              return RichText(
+                text: TextSpan(
+                  style: context.appTextStyleExtensions.body2.copyWith(
+                    color: context.appColorsExtensions.textSecondary,
+                  ),
+                  children: [
+                    const TextSpan(text: "Good Morning,\n"),
+                    TextSpan(text: currentUser?.username ?? "Guest"),
+                  ],
                 ),
-                children: const [
-                  TextSpan(text: "Good Morning,\n"),
-                  TextSpan(text: "Trung"),
-                ],
-              ),
-            ),
+              );
+            }),
             Text(
               DateFormat('EEE d MMM, y').format(DateTime.now()),
               style: context.appTextStyleExtensions.h5,

@@ -21,7 +21,7 @@ class DioClient {
         ),
       ) {
     dio.interceptors.addAll([
-      AuthInterceptor(),
+      AuthInterceptor(dio),
       LoggingInterceptor(),
       ErrorInterceptor(),
     ]);

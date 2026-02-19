@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:lask_news_app/core/utils/snackbar_utils.dart';
 
 class ErrorInterceptor extends Interceptor {
   @override
@@ -12,6 +13,10 @@ class ErrorInterceptor extends Interceptor {
       500 => 'Internal server error. Please try again later.',
       _ => err.message ?? 'An unexpected error occurred.',
     };
+
+    SnackbarUtils.showError(
+      err.response?.data["error"]["message"] ?? message,
+    );
 
     handler.next(
       DioException(

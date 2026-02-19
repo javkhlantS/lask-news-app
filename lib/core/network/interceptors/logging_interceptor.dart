@@ -7,7 +7,7 @@ class LoggingInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     if (kDebugMode) {
-      log('→ ${options.method} ${options.uri}', name: 'HTTP');
+      log('→ ${options.method} ${options.uri} ${options.data}', name: 'HTTP');
     }
     handler.next(options);
   }
