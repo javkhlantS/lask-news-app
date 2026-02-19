@@ -4,9 +4,15 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:lask_news_app/core/routing/app_routes.dart';
 import 'package:lask_news_app/core/routing/constants/app_route_names.dart';
 import 'package:lask_news_app/core/theme/app_theme.dart';
+import 'package:lask_news_app/core/utils/storage_utils.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
+
+  String get _initialRoute {
+    bool? welcomeSeen = StorageUtils.read("welcome_seen");
+    return welcomeSeen == true ? AppRouteNames.home : AppRouteNames.welcome;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +21,7 @@ class App extends StatelessWidget {
       theme: AppTheme.light(),
       darkTheme: AppTheme.dark(),
       getPages: AppRoutes.routes,
-      initialRoute: AppRouteNames.welcome,
+      initialRoute: _initialRoute,
       builder: (context, child) {
         final brightness = Theme.of(context).brightness;
         final style = brightness == Brightness.dark

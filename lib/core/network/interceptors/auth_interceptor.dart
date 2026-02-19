@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
+import 'package:lask_news_app/core/controllers/auth_controller.dart';
 import 'package:lask_news_app/core/utils/storage_utils.dart';
 
 class AuthInterceptor extends Interceptor {
@@ -23,6 +25,8 @@ class AuthInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode == 401 && StorageUtils.hasKey("jwt")) {
       await StorageUtils.remove("jwt");
+      final authController = Get.find<AuthController>();
+      authController.currentUser.value = null;
 
       // Retry with the public API token
       final token = dotenv.env['BACKEND_API_TOKEN'];

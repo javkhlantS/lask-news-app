@@ -3,9 +3,14 @@ import 'package:get/get.dart';
 import 'package:lask_news_app/core/routing/constants/app_route_names.dart';
 import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
+import 'package:lask_news_app/core/utils/storage_utils.dart';
 
 class WelcomeContent extends StatelessWidget {
   const WelcomeContent({super.key});
+
+  void markWelcomeAsRead() async {
+    await StorageUtils.write("welcome_seen", true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +55,7 @@ class WelcomeContent extends StatelessWidget {
             const SizedBox(height: 24),
             ElevatedButton.icon(
               onPressed: () {
+                markWelcomeAsRead();
                 Get.offAllNamed(AppRouteNames.home);
               },
               label: const Text("Explore"),
