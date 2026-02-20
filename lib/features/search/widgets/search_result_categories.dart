@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
 import 'package:lask_news_app/features/search/controllers/search_result_controller.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class SearchResultCategories extends StatelessWidget {
   const SearchResultCategories({super.key});
@@ -11,28 +12,33 @@ class SearchResultCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<SearchResultController>();
 
-    return SingleChildScrollView(
-      clipBehavior: Clip.none,
-      scrollDirection: Axis.horizontal,
-      physics: const BouncingScrollPhysics(),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        spacing: 12,
-        children: [
-          for (int i = 0; i < controller.categories.length; i++)
-            Obx(() {
-              final isActive = i == controller.selectedCategoryIndex.value;
+    return Obx(() {
+      final List<dynamic> categories = controller.isArticlesLoading.value
+          ? List.filled(5, {
+              "label": BoneMock.title,
+              "count": 10,
+            })
+          : controller.categories;
 
-              return _CategoryItem(
-                isActive: isActive,
-                category: controller.categories[i]['label'] as String,
-                count: controller.categories[i]['count'] as int,
+      return SingleChildScrollView(
+        clipBehavior: Clip.none,
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          spacing: 12,
+          children: [
+            for (int i = 0; i < categories.length; i++)
+              _CategoryItem(
+                isActive: i == controller.selectedCategoryIndex.value,
+                category: categories[i]['label'] as String,
+                count: categories[i]['count'] as int,
                 onTap: () => controller.categoryChange(i),
-              );
-            }),
-        ],
-      ),
-    );
+              ),
+          ],
+        ),
+      );
+    });
   }
 }
 

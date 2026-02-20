@@ -43,7 +43,12 @@ class SearchResultScreen extends StatelessWidget {
         padding: const EdgeInsets.only(left: 24, right: 24, top: 16),
         child: Column(
           children: [
-            const SearchResultCategories(),
+            Obx(() {
+              return Skeletonizer(
+                enabled: controller.isArticlesLoading.value,
+                child: const SearchResultCategories(),
+              );
+            }),
             const SizedBox(height: 24),
             Obx(() {
               final isLoading = controller.isArticlesLoading.value;
@@ -70,7 +75,7 @@ class SearchResultScreen extends StatelessWidget {
                         ),
                       ),
                     )
-                  : controller.articles;
+                  : controller.filteredArticles;
 
               if (!isLoading && articles.isEmpty) {
                 return Expanded(
