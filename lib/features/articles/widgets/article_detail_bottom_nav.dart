@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lask_news_app/core/theme/extensions/app_button_style_extensions.dart';
 import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
+import 'package:lask_news_app/features/articles/controllers/article_detail_controller.dart';
 
 class ArticleDetailBottomNav extends StatelessWidget {
   const ArticleDetailBottomNav({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ArticleDetailController>();
     return ClipRRect(
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(24),
@@ -40,11 +42,29 @@ class ArticleDetailBottomNav extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.bookmark_outline),
-                    style: context.appButtonStyleExtensions.ghostIcon,
-                  ),
+                  Obx(() {
+                    if (controller.isBookmarkLoading.value) {
+                      return const SizedBox(
+                        width: 40,
+                        height: 40,
+                        child: Center(
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          ),
+                        ),
+                      );
+                    }
+                    final bookmarked = controller.isBookmarked;
+                    return IconButton(
+                      onPressed: controller.toggleBookmark,
+                      icon: Icon(
+                        bookmarked ? Icons.bookmark : Icons.bookmark_outline,
+                      ),
+                      style: context.appButtonStyleExtensions.ghostIcon,
+                    );
+                  }),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(Icons.share_outlined),

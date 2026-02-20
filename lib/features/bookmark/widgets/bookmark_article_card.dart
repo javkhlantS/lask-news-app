@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lask_news_app/core/models/article.dart';
 import 'package:lask_news_app/core/routing/constants/app_route_names.dart';
 import 'package:lask_news_app/core/theme/extensions/app_colors_extensions.dart';
 import 'package:lask_news_app/core/theme/extensions/app_text_style_extensions.dart';
+import 'package:lask_news_app/core/utils/picture_utils.dart';
 import 'package:lask_news_app/features/bookmark/controllers/bookmark_controller.dart';
 
 class BookmarkArticleCard extends StatelessWidget {
-  const BookmarkArticleCard({super.key});
+  final Article article;
+
+  const BookmarkArticleCard({
+    super.key,
+    required this.article,
+  });
 
   void navigateToArticle() {
-    Get.toNamed(AppRouteNames.articleDetail);
+    Get.toNamed(
+      AppRouteNames.articleDetail,
+      arguments: {
+        "documentId": article.documentId,
+      },
+    );
   }
 
   @override
@@ -26,7 +38,7 @@ class BookmarkArticleCard extends StatelessWidget {
               GestureDetector(
                 onTap: navigateToArticle,
                 child: Text(
-                  "Discovering Hidden Gems: 8 Off-The-Beaten-Path Travel Destinations",
+                  article.title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: context.appTextStyleExtensions.h5,
@@ -34,7 +46,9 @@ class BookmarkArticleCard extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                "Interior",
+                (article.categories ?? [])
+                    .map((category) => category.title)
+                    .join(", "),
                 style: context.appTextStyleExtensions.footnote.copyWith(
                   color: context.appColorsExtensions.textSecondary,
                 ),
@@ -51,13 +65,15 @@ class BookmarkArticleCard extends StatelessWidget {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
             clipBehavior: Clip.hardEdge,
             child: Image.network(
-              "https://images.pexels.com/photos/18887675/pexels-photo-18887675.jpeg",
+              PictureUtils.getFullUrl(url: article.picture.url),
               fit: BoxFit.cover,
             ),
           ),
         ),
         Obx(() {
           final isEditing = controller.editBookmark.value;
+          final isMarkedForRemoval =
+              controller.selectedForRemoval.contains(article.id);
           return AnimatedSize(
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeInOut,
@@ -73,7 +89,7 @@ class BookmarkArticleCard extends StatelessWidget {
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () => controller.toggleSelection(article.id),
                             splashColor: context
                                 .appColorsExtensions
                                 .textSecondary
@@ -86,10 +102,13 @@ class BookmarkArticleCard extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(14),
                               child: Icon(
-                                Icons.bookmark,
+                                isMarkedForRemoval
+                                    ? Icons.bookmark_border
+                                    : Icons.bookmark,
                                 size: 20,
-                                color:
-                                    context.appColorsExtensions.textSecondary,
+                                color: isMarkedForRemoval
+                                    ? context.appColorsExtensions.systemError
+                                    : context.appColorsExtensions.textSecondary,
                               ),
                             ),
                           ),

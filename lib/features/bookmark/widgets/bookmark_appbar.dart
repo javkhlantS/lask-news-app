@@ -23,7 +23,7 @@ class BookmarkAppbar extends StatelessWidget implements PreferredSizeWidget {
         Obx(
           () => controller.editBookmark.value
               ? TextButton(
-                  onPressed: controller.toggleEdit,
+                  onPressed: controller.applyChangesAndFinishEdit,
                   style: context.appButtonStyleExtensions.ghostSmall,
                   child: const Text("Done"),
                 )
