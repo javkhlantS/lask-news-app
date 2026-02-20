@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:lask_news_app/core/controllers/auth_controller.dart';
+import 'package:lask_news_app/core/controllers/bottom_nav_controller.dart';
 import 'package:lask_news_app/core/models/article.dart';
 import 'package:lask_news_app/core/repositories/article_repository.dart';
 import 'package:lask_news_app/core/repositories/user_repository.dart';
+import 'package:lask_news_app/core/routing/constants/app_route_names.dart';
 
 class ArticleDetailController extends GetxController {
   final arguments = Get.arguments as Map<String, dynamic>;
@@ -32,6 +34,12 @@ class ArticleDetailController extends GetxController {
   }
 
   Future<void> toggleBookmark() async {
+    if (!_authController.isLoggedIn) {
+      Get.find<BottomNavController>().changePage(3);
+      Get.until((route) => route.settings.name == AppRouteNames.home);
+      return;
+    }
+
     final user = _authController.currentUser.value;
     final currentArticle = article.value;
     if (user == null || currentArticle == null || isBookmarkLoading.value) {
